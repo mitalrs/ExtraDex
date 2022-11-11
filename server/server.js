@@ -4,8 +4,9 @@ import mongoose from 'mongoose';
 const PORT = 4000
 const app = express();
 
-mongoose.connect("mongodb+srv://mitazl:@cluster0.uqsmrq1.mongodb.net/?retryWrites=true&w=majority"
-).then(()=> console.log('MongoDB connection is successful')).catch((err)=>console.error(err));
+await mongoose.connect("mongodb+srv://mital:Mitalmital@cluster0.uqsmrq1.mongodb.net/?retryWrites=true&w=majority")
+ console.log('MongoDB connection is successful');
+
 
 app.get("/",(req,res)=>{
     res.send("hello world");
@@ -13,4 +14,4 @@ app.get("/",(req,res)=>{
 
 app.listen(PORT, ()=>{
     console.log("Server is running at http://localhost:4000");
-})
+});
