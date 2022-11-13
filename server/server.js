@@ -1,5 +1,5 @@
 import express from 'express';
-import mongoose from 'mongoose';
+import connect from './database/mongodb.js'
 import cors from 'cors';
 import bodyParser from 'body-parser';
 import TransactionsApi from "./routes/TransactionsApi.js";
@@ -15,9 +15,7 @@ app.get("/",(req,res)=>{
 
 app.use("/transaction", TransactionsApi);
 
-await mongoose.connect("mongodb+srv://mital:Mitalmital@cluster0.uqsmrq1.mongodb.net/?retryWrites=true&w=majority")
- console.log('MongoDB connection is successful');
-
+await connect();
 
 app.listen(PORT, ()=>{
     console.log("Server is running at http://localhost:4000");

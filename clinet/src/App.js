@@ -1,11 +1,14 @@
 import { useEffect, useState } from "react";
+import Button from '@mui/material/Button';
+
+const InitialForm = {
+  amount:0,
+  description:'',
+  date: '',
+}
 
 function App() {
-  const [form, setForm] = useState({
-    amount:0,
-    description:'',
-    date: '',
-  });
+  const [form, setForm] = useState(InitialForm);
 
   const [transactions, setTransactions] = useState([]);
 
@@ -36,11 +39,13 @@ function App() {
       }
     });
     if(res.ok){
+      setForm(InitialForm);
       fetchTransactions();
     }
   }
   return (
     <div>
+      <Button variant="contained">Hello World</Button>
       <form onSubmit={handleSubmit}>
         <input 
           type="number" 
