@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
-import Button from '@mui/material/Button';
+import  AppBar  from './components/AppBar.js';
+import TransactionForm from "./components/TransactionForm.js";
 
 const InitialForm = {
   amount:0,
@@ -45,7 +46,9 @@ function App() {
   }
   return (
     <div>
-      <Button variant="contained">Hello World</Button>
+      <AppBar/>
+      <TransactionForm/>
+      
       <form onSubmit={handleSubmit}>
         <input 
           type="number" 
