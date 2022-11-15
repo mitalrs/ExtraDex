@@ -16,13 +16,10 @@ export default function TransactionForm() {
   return (
     <Card sx={{ minWidth: 275, marginTop:10 }}>
       <CardContent>
+      <Typography variant="title">Add new transaction</Typography>
         <form>
 
-        <Typography variant="body2">
-          well meaning and kindly.
-          <br />
-          {'"a benevolent smile"'}
-        </Typography>
+       
         <TextField id="outlined-basic" label="Outlined" variant="outlined" />
         <TextField id="outlined-basic" label="Outlined" variant="outlined" />
         <LocalizationProvider dateAdapter={AdapterDayjs}>
@@ -33,7 +30,7 @@ export default function TransactionForm() {
           renderInput={(params) => <TextField {...params} />}
         />
          </LocalizationProvider>
-         <Button variant="contained">Contained</Button>
+         <Button type="submit" variant="text">Submit</Button>
         </form>
         
       </CardContent>
