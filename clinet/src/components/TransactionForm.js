@@ -1,7 +1,5 @@
 import * as React from 'react';
-import Box from '@mui/material/Box';
 import Card from '@mui/material/Card';
-import CardActions from '@mui/material/CardActions';
 import CardContent from '@mui/material/CardContent';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
@@ -10,27 +8,54 @@ import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { DesktopDatePicker } from '@mui/x-date-pickers/DesktopDatePicker';
 
+import {useState} from "react";
+
+const InitialForm = {
+  amount:0,
+  description:'',
+  date: '',
+};
 
 export default function TransactionForm() {
-  function handleChange(){}
+  const [form, setForm] = useState(InitialForm);
+  function handleChange(e){
+    setForm({ ... form, [e.target.name]:e.target.value})
+  }
+
+  async function handleSubmit(e){
+    e.preventDefault();
+    // console.log(form);
+    const res = await fetch('http://localhost:4000/transaction',{
+      method: "POST",
+      body: JSON.stringify(form),
+      headers:{
+        'content-type': "application/json",
+      }
+    });
+    if(res.ok){
+      setForm(InitialForm);
+      // fetchTransactions();
+    }
+  }
+
   return (
     <Card sx={{ minWidth: 275, marginTop:10 }}>
       <CardContent>
-      <Typography variant="title">Add new transaction</Typography>
-        <form>
-
-       
-        <TextField id="outlined-basic" label="Outlined" variant="outlined" />
-        <TextField id="outlined-basic" label="Outlined" variant="outlined" />
+      <Typography variant="h6">Add new transaction</Typography>
+        
+        <form onSubmit={handleSubmit}>
+        <TextField sx={{marginRight: 5}} id="outlined-basic" label="Amount" size="small" variant="outlined" value={form.amount} onChange={handleChange}/>
+        <TextField sx={{marginRight: 5}} id="outlined-basic" label="Description" size="small" variant="outlined" value={form.description} onChange={handleChange}/>
         <LocalizationProvider dateAdapter={AdapterDayjs}>
         <DesktopDatePicker
-          label="Date desktop"
+          label="Transaction Date"
           inputFormat="MM/DD/YYYY"
+          value={form.amount}
           onChange={handleChange}
-          renderInput={(params) => <TextField {...params} />}
+          renderInput={(params) => <TextField sx={{marginRight: 5}} size="small" {...params} />}
         />
          </LocalizationProvider>
-         <Button type="submit" variant="text">Submit</Button>
+         <Button type="submit" variant="contained">Submit</Button>
         </form>
         
       </CardContent>
