@@ -23,30 +23,8 @@ function App() {
   return (
     <div>
       <AppBar/>
-      <TransactionForm/>
+      <TransactionForm fetchTransactions={fetchTransactions}/>
       
-      <form onSubmit={handleSubmit}>
-        <input 
-          type="number" 
-          name="amount"
-          value={form.amount}
-          onChange={handleInput} 
-          placeholder="Enter tansaction amount"
-        />
-        <input 
-          type="text" 
-          name="description"
-          value={form.description}
-          onChange={handleInput} 
-          placeholder="Enter tansaction detail"
-        />
-        <input type="date"
-          name="date"
-          value={form.date}
-          onChange={handleInput} 
-        />
-        <button type="submit">Submit</button>
-      </form>
       <br/>
 
       <section>

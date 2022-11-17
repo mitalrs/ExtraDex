@@ -13,13 +13,17 @@ import {useState} from "react";
 const InitialForm = {
   amount:0,
   description:'',
-  date: '',
+  date: new Date(),
 };
 
-export default function TransactionForm() {
+export default function TransactionForm({fetchTransactions}) {
   const [form, setForm] = useState(InitialForm);
   function handleChange(e){
     setForm({ ... form, [e.target.name]:e.target.value})
+  }
+
+  function handleDate(newValue){
+    setForm({...form, date:newValue})
   }
 
   async function handleSubmit(e){
@@ -34,7 +38,7 @@ export default function TransactionForm() {
     });
     if(res.ok){
       setForm(InitialForm);
-      // fetchTransactions();
+      fetchTransactions();
     }
   }
 
@@ -44,14 +48,32 @@ export default function TransactionForm() {
       <Typography variant="h6">Add new transaction</Typography>
         
         <form onSubmit={handleSubmit}>
-        <TextField sx={{marginRight: 5}} id="outlined-basic" label="Amount" size="small" variant="outlined" value={form.amount} onChange={handleChange}/>
-        <TextField sx={{marginRight: 5}} id="outlined-basic" label="Description" size="small" variant="outlined" value={form.description} onChange={handleChange}/>
+        <TextField 
+        sx={{marginRight: 5}} 
+        id="outlined-basic" 
+        label="Amount" 
+        size="small" 
+        name="amount"
+        variant="outlined" 
+        value={form.amount} 
+        onChange={handleChange}
+        />
+        <TextField 
+        sx={{marginRight: 5}} 
+        id="outlined-basic" 
+        label="Description" 
+        size="small" 
+        name="description"
+        variant="outlined" 
+        value={form.description} 
+        onChange={handleChange}
+        />
         <LocalizationProvider dateAdapter={AdapterDayjs}>
         <DesktopDatePicker
           label="Transaction Date"
           inputFormat="MM/DD/YYYY"
-          value={form.amount}
-          onChange={handleChange}
+          value={form.date}
+          onChange={handleDate}
           renderInput={(params) => <TextField sx={{marginRight: 5}} size="small" {...params} />}
         />
          </LocalizationProvider>
