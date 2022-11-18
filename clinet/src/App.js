@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import  AppBar  from './components/AppBar.js';
 import TransactionForm from "./components/TransactionForm.js";
+import TransactionsList from "./components/TransactionsList.js";
 
 
 function App() {
@@ -24,27 +25,10 @@ function App() {
     <div>
       <AppBar/>
       <TransactionForm fetchTransactions={fetchTransactions}/>
+      <TransactionsList transactions={transactions} />
       
-      <br/>
-
-      <section>
-        <table>
-          <thead>
-            <th>Amount</th>
-            <th>description</th>
-            <th>Date</th>
-          </thead>
-          <tbody>
-            {transactions.map((trx)=>(
-            <tr key={trx._id}>
-              <td>{trx.amount}</td>
-              <td>{trx.description}</td>
-              <td>{trx.date}</td>
-            </tr>
-            ))}
-          </tbody>
-        </table>
-      </section>
+       <br/>
+       
     </div>
   );
 }
