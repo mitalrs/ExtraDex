@@ -14,7 +14,7 @@ import IconButton from '@mui/material/IconButton';
 
 
 
-export default function TransactionsList({ transactions }) {
+export default function TransactionsList({ transactions, fetchTransactions }) {
 
   async function remove(_id){
     if(!window.confirm('Are you sure to delete')) return;
@@ -22,6 +22,7 @@ export default function TransactionsList({ transactions }) {
       method: "DELETE",
   });
   if(res.ok){
+    fetchTransactions();
     window.alert("Deleted Successfully");
   }
   }

@@ -20,7 +20,7 @@ router.post("/",async (req,res)=>{
 });
 
 router.delete('/:id', async(req,res) =>{
-    await Transaction.findOneAndDelete(req.params.id);
+    await Transaction.deleteOne({_id: req.params.id});
     res.json({ message: "success" });
 });
 
