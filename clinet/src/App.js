@@ -9,6 +9,7 @@ import TransactionsList from "./components/TransactionsList.js";
 function App() {
 
   const [transactions, setTransactions] = useState([]);
+  const [editTransaction, setEditTransaction] = useState({});
 
   useEffect(()=>{
     fetchTransactions()
@@ -27,9 +28,10 @@ function App() {
     <div>
       <AppBar/>
       <Container>
-      <TransactionForm fetchTransactions={fetchTransactions}/>
+      <TransactionForm fetchTransactions={fetchTransactions} editTransaction={editTransaction}/>
       <TransactionsList transactions={transactions} 
       fetchTransactions={fetchTransactions}
+      setEditTransaction={setEditTransaction}
       />
       </Container>
        <br/>

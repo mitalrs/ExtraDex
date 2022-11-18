@@ -7,24 +7,28 @@ import TableHead from '@mui/material/TableHead';
 import Typography from '@mui/material/Typography';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
-import Container from '@mui/material/Container';
 import EditTwoToneIcon from '@mui/icons-material/EditTwoTone';
 import DeleteSharpIcon from '@mui/icons-material/DeleteSharp';
 import IconButton from '@mui/material/IconButton';
+import dayjs from 'dayjs';
 
 
 
-export default function TransactionsList({ transactions, fetchTransactions }) {
+export default function TransactionsList({ transactions, fetchTransactions, setEditTransaction }) {
 
-  async function remove(_id){
-    if(!window.confirm('Are you sure to delete')) return;
-    const res = await fetch(`http://localhost:4000/transaction/${_id}`,{ 
+  async function remove(_id) {
+    if (!window.confirm('Are you sure to delete')) return;
+    const res = await fetch(`http://localhost:4000/transaction/${_id}`, {
       method: "DELETE",
-  });
-  if(res.ok){
-    fetchTransactions();
-    window.alert("Deleted Successfully");
+    });
+    if (res.ok) {
+      fetchTransactions();
+      window.alert("Deleted Successfully");
+    }
   }
+
+  function formatDate(date){
+    return dayjs(date).format("DD MMM, YYYY");
   }
 
   return (
@@ -50,13 +54,13 @@ export default function TransactionsList({ transactions, fetchTransactions }) {
                   {row.amount}
                 </TableCell>
                 <TableCell align="center">{row.description}</TableCell>
-                <TableCell align="center">{row.date}</TableCell>
+                <TableCell align="center">{formatDate(row.date)}</TableCell>
                 <TableCell align="center">
-                  <IconButton color="primary" component="label">
-                  <EditTwoToneIcon />
+                  <IconButton color="primary" component="label" onClick={()=>setEditTransaction(row)}>
+                    <EditTwoToneIcon />
                   </IconButton>
-                  <IconButton color="warning" component="label" onClick={()=>remove(row._id)}>
-                  <DeleteSharpIcon />
+                  <IconButton color="warning" component="label" onClick={() => remove(row._id)}>
+                    <DeleteSharpIcon />
                   </IconButton>
                 </TableCell>
               </TableRow>

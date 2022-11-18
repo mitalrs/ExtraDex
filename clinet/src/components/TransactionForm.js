@@ -16,8 +16,13 @@ const InitialForm = {
   date: new Date(),
 };
 
-export default function TransactionForm({fetchTransactions}) {
+export default function TransactionForm({fetchTransactions, editTransaction}) {
   const [form, setForm] = useState(InitialForm);
+
+  React.useEffect(()=>{
+    console.log(editTransaction);
+  }, [editTransaction]);
+  
   function handleChange(e){
     setForm({ ... form, [e.target.name]:e.target.value})
   }
