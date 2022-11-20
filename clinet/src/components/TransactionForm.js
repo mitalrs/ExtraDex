@@ -9,6 +9,7 @@ import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { DesktopDatePicker } from '@mui/x-date-pickers/DesktopDatePicker';
 
 import {useState} from "react";
+import { create } from 'domain';
 
 const InitialForm = {
   amount:0,
@@ -20,7 +21,9 @@ export default function TransactionForm({fetchTransactions, editTransaction}) {
   const [form, setForm] = useState(InitialForm);
 
   React.useEffect(()=>{
-    console.log(editTransaction);
+    if(editTransaction !== {}){
+      setForm(editTransaction);
+    }
   }, [editTransaction]);
   
   function handleChange(e){
@@ -33,7 +36,16 @@ export default function TransactionForm({fetchTransactions, editTransaction}) {
 
   async function handleSubmit(e){
     e.preventDefault();
-    // console.log(form);
+    const res = editTransaction === {} ? create(): update()
+    }
+
+    if(res.ok){
+      setForm(InitialForm);
+      fetchTransactions();
+    }
+  }
+
+  async function create(){
     const res = await fetch('http://localhost:4000/transaction',{
       method: "POST",
       body: JSON.stringify(form),
@@ -41,10 +53,19 @@ export default function TransactionForm({fetchTransactions, editTransaction}) {
         'content-type': "application/json",
       }
     });
-    if(res.ok){
-      setForm(InitialForm);
-      fetchTransactions();
-    }
+    return res;
+  }
+
+  async function update(){
+    const res = await fetch(`http://localhost:4000/transaction/${editTransaction._id}`,
+    {
+      method: "PATCH",
+      body: JSON.stringify(form),
+      headers:{
+        'content-type': "application/json",
+      }
+    });
+    return res;
   }
 
   return (
@@ -82,7 +103,13 @@ export default function TransactionForm({fetchTransactions, editTransaction}) {
           renderInput={(params) => <TextField sx={{marginRight: 5}} size="small" {...params} />}
         />
          </LocalizationProvider>
-         <Button type="submit" variant="contained">Submit</Button>
+         {editTransaction !== {} && (
+          <Button type="submit" variant="secondary">Update</Button>
+         )}
+         {editTransaction === {} && (
+          <Button type="submit" variant="contained">Submit</Button>
+         )}
+         
         </form>
         
       </CardContent>
