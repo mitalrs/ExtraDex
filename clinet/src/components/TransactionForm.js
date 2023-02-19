@@ -21,7 +21,7 @@ export default function TransactionForm({ fetchTransactions, editTransaction }) 
   const [form, setForm] = useState(InitialForm);
 
   React.useEffect(() => {
-    if (editTransaction !== {}) {
+    if (editTransaction.amount !== undefined) {
       setForm(editTransaction);
     }
   }, [editTransaction]);
@@ -36,15 +36,16 @@ export default function TransactionForm({ fetchTransactions, editTransaction }) 
 
   async function handleSubmit(e) {
     e.preventDefault();
-    const res = editTransaction === {} ? create() : update();
-  
+    const res = editTransaction.amount === undefined ? create() : update();
 
-  
-  if (res.ok) {
-    setForm(InitialForm);
-    fetchTransactions();
   }
-}
+
+  function reload(res){
+    if (res.ok) {
+      setForm(InitialForm);
+      fetchTransactions();
+    }
+  }
 
 async function create() {
   const res = await fetch('http://localhost:4000/transaction', {
@@ -54,7 +55,7 @@ async function create() {
       'content-type': "application/json",
     },
   });
-  return res;
+  reload(res);
 }
 
 async function update() {
@@ -66,7 +67,7 @@ async function update() {
         'content-type': "application/json",
       }
     });
-  return res;
+    reload(res);
 }
 
 return (
@@ -104,10 +105,10 @@ return (
             renderInput={(params) => <TextField sx={{ marginRight: 5 }} size="small" {...params} />}
           />
         </LocalizationProvider>
-        {editTransaction !== {} && (
+        {editTransaction.amount !== undefined && (
           <Button type="submit" variant="secondary">Update</Button>
         )}
-        {editTransaction === {} && (
+        {editTransaction.amount === undefined && (
           <Button type="submit" variant="contained">Submit</Button>
         )}
 
