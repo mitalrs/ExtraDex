@@ -10,17 +10,29 @@ import Box from '@mui/material/Box';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
-import { createTheme, ThemeProvider } from '@mui/material/styles';
 
 
-export default function Register() {
-    const handleSubmit = (event) => {
+export default function Login() {
+    const handleSubmit = async (event) => {
         event.preventDefault();
         const data = new FormData(event.currentTarget);
-        console.log({
+        const form = {
             email: data.get('email'),
             password: data.get('password'),
+        };
+        
+        
+        const res = await fetch('http://localhost:4000/auth/login', {
+            method:'POST',
+            body:JSON.stringify(form),
+            headers: {
+                'content-type': "application/json",
+            },
         });
+
+        if(res.ok){
+            console.log("login succesfully");
+        }
     };
 
     return (
