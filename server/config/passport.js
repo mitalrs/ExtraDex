@@ -13,7 +13,7 @@ opts.secretOrKey = 'some secret.';
 export default (passport) => {
 
     passport.use(new JwtStrategy(opts, function (jwt_payload, done) {
-        User.findOne({ id: jwt_payload.sub }, function (err, user) {
+        User.findById( jwt_payload._id , function (err, user) {
             if (err) {
                 return done(err, false);
             }
