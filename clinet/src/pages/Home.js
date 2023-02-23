@@ -17,6 +17,7 @@ export default function Home() {
 
     async function fetchTransactions() {
         const token = Cookies.get('token');
+        console.log(token)
         const res = await fetch('http://localhost:4000/transaction', 
         {
             headers: {
@@ -24,6 +25,7 @@ export default function Home() {
             },
         });
         const { data } = await res.json();
+        console.log(data);
         // console.log(data);
         setTransactions(data);
     }
