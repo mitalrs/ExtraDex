@@ -3,9 +3,9 @@ import Home from './pages/Home';
 import Register from './pages/Register';
 import { createBrowserRouter, Navigate } from "react-router-dom";
 import App from './App';
-import Cookies from 'js-cookie';
+import CheckAuth from './utils/CheckAuth';
 
-const token = Cookies.get('token');
+
 
 
 export default createBrowserRouter([
@@ -14,7 +14,10 @@ export default createBrowserRouter([
       children: [
         {
           path: "/",
-          element: token? <Home /> :  <Navigate to="/login" replace={true} />,
+        //   element: token? <Home /> :  <Navigate to="/login" replace={true} />,
+        element: <CheckAuth>
+            <Home />
+        </CheckAuth>
         },
         {
           path: "/login",
