@@ -4,9 +4,11 @@ import cors from 'cors';
 import bodyParser from 'body-parser';
 import TransactionsApi from "./routes/TransactionsApi.js";
 import AuthApi from "./routes/authApi.js";
+import UserApi from "./routes/UserApi.js";
 import passport from 'passport';
 import passportConfig from './config/passport.js'
 import * as dotenv from 'dotenv';
+import User from './models/User.js';
 
 dotenv.config();
 
@@ -23,6 +25,8 @@ app.get("/",(req,res)=>{
 
 app.use("/transaction", TransactionsApi);
 app.use("/auth", AuthApi);
+app.use("/user", UserApi);
+
 
 
 await connect();
