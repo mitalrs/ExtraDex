@@ -8,7 +8,6 @@ import UserApi from "./routes/UserApi.js";
 import passport from 'passport';
 import passportConfig from './config/passport.js'
 import * as dotenv from 'dotenv';
-import User from './models/User.js';
 
 dotenv.config();
 
