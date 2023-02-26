@@ -12,7 +12,6 @@ function App() {
 
   const [isLoading, setIsLoading] = useState(true);
   
-  // const auth = useSelector(state => state.auth)
   const dispatch = useDispatch();
 
   async function fetchUser() {
@@ -28,8 +27,8 @@ function App() {
     }
     setIsLoading(false);
 };
-
-  useEffect(()=>{
+  
+useEffect(()=>{
     fetchUser();
   },[])
 
