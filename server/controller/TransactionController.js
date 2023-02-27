@@ -7,6 +7,7 @@ export const index = async (req, res) => {
 };
 
 export const create = async (req, res) => {
+    console.log(req.user);
     const { amount, description, date } = req.body;
     const transaction = new Transaction({
         amount,
