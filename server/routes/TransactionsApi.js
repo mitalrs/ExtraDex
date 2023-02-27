@@ -1,16 +1,14 @@
 import { Router } from "express";
 import Transaction from "../models/Transaction.js";
 import passport from 'passport';
+import * as TransactionController from '../controller/TransactionController.js';
 
 const router = Router();
 
 router.get(
     '/',
     passport.authenticate('jwt', { session: false }),
-    async (req, res) => {
-        const transaction = await Transaction.find({}).sort({ createdAt: -1 });
-        res.json({ data: transaction });
-    }
+    TransactionController.index
 );
 
 router.post("/", async (req, res) => {
