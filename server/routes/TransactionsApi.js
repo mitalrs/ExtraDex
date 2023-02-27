@@ -1,5 +1,5 @@
 import { Router } from "express";
-import Transaction from "../models/Transaction.js";
+
 import passport from 'passport';
 import * as TransactionController from '../controller/TransactionController.js';
 

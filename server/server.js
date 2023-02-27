@@ -2,12 +2,10 @@ import express from 'express';
 import connect from './database/mongodb.js'
 import cors from 'cors';
 import bodyParser from 'body-parser';
-import TransactionsApi from "./routes/TransactionsApi.js";
-import AuthApi from "./routes/authApi.js";
-import UserApi from "./routes/UserApi.js";
 import passport from 'passport';
 import passportConfig from './config/passport.js'
 import * as dotenv from 'dotenv';
+import routes from './routes/index.js';
 
 dotenv.config();
 
@@ -22,10 +20,7 @@ app.get("/",(req,res)=>{
     res.send("hello world");
 });
 
-app.use("/transaction", TransactionsApi);
-app.use("/auth", AuthApi);
-app.use("/user", UserApi);
-
+app.use('/', routes)
 
 
 await connect();
