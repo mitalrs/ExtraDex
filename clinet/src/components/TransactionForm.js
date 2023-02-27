@@ -11,6 +11,7 @@ import Cookies from 'js-cookie';
 import Autocomplete from '@mui/material/Autocomplete';
 import { useState } from "react";
 import Box from '@mui/material/Box';
+import { useSelector } from 'react-redux';
 // import { create } from 'domain';
 
 const InitialForm = {
@@ -21,14 +22,10 @@ const InitialForm = {
 };
 
 export default function TransactionForm({ fetchTransactions, editTransaction }) {
+  const { categories } = useSelector((state) => state.auth.user);
   const token = Cookies.get('token');
   const [form, setForm] = useState(InitialForm);
-  const categories = [
-    { label: 'Travel' },
-    { label: 'Shopping' },
-    { label: 'Investment' },
-    { label: 'Bills' },
-  ]
+ 
 
   React.useEffect(() => {
     if (editTransaction.amount !== undefined) {
