@@ -7,7 +7,7 @@ const categories = [
     { label: 'Shopping', icon: 'user'},
     { label: 'Investment', icon: 'user'},
     { label: 'Bills', icon: 'user'},
-]
+];
 
 export const register = async (req, res) => {
     const { email, password, firstName, lastName } = req.body;

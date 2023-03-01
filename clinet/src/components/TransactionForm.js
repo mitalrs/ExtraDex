@@ -18,7 +18,7 @@ const InitialForm = {
   amount: 0,
   description: '',
   date: new Date(),
-  category: ''
+  category: '',
 };
 
 export default function TransactionForm({ fetchTransactions, editTransaction }) {
