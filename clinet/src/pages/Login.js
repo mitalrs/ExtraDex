@@ -38,6 +38,7 @@ export default function Login() {
 
         const { token, user } = await res.json()
 
+
         if(res.ok){
             Cookies.set('token', token)
             dispatch(getUser(user))
