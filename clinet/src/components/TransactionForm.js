@@ -18,14 +18,14 @@ const InitialForm = {
   amount: 0,
   description: '',
   date: new Date(),
-  category: '',
+  category_id: '',
 };
 
 export default function TransactionForm({ fetchTransactions, editTransaction }) {
   const { categories } = useSelector((state) => state.auth.user);
   const token = Cookies.get('token');
   const [form, setForm] = useState(InitialForm);
- 
+
 
   React.useEffect(() => {
     if (editTransaction.amount !== undefined) {
@@ -79,12 +79,17 @@ export default function TransactionForm({ fetchTransactions, editTransaction }) 
     reload(res);
   }
 
+  function getCategoryNameById() {
+    return (categories.find((category) => category._id === form.category_id) ?? ""
+    );
+  }
+
   return (
     <Card sx={{ minWidth: 275, marginTop: 10 }}>
       <CardContent>
         <Typography variant="h6">Add new transaction</Typography>
 
-        <Box component='form' onSubmit={handleSubmit} sx={{display: "flex"}}>
+        <Box component='form' onSubmit={handleSubmit} sx={{ display: "flex" }}>
           <TextField
             sx={{ marginRight: 5 }}
             id="outlined-basic"
@@ -116,8 +121,11 @@ export default function TransactionForm({ fetchTransactions, editTransaction }) 
           </LocalizationProvider>
 
           <Autocomplete
-            disablePortal
-            id="combo-box-demo"
+            value={getCategoryNameById()}
+            onChange={(event, newValue) => {
+              setForm({ ...form, category_id: newValue._id });
+            }}
+            id="controllable-states-demo"
             options={categories}
             sx={{ width: 200, marginRight: 5 }}
             renderInput={(params) => <TextField {...params} size="small" label="Category" />}

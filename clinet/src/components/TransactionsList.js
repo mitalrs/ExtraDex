@@ -32,7 +32,7 @@ export default function TransactionsList({ transactions, fetchTransactions, setE
     }
   }
 
-  function formatDate(date){
+  function formatDate(date) {
     return dayjs(date).format("DD MMM, YYYY");
   }
 
@@ -45,31 +45,36 @@ export default function TransactionsList({ transactions, fetchTransactions, setE
             <TableRow>
               <TableCell align="center">Amount</TableCell>
               <TableCell align="center">Description</TableCell>
+              <TableCell align="center">Category</TableCell>
               <TableCell align="center">Date</TableCell>
               <TableCell align="center">Action</TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
-            {transactions.map((row) => (
-              <TableRow
-                key={row._id}
-                sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
-              >
-                <TableCell align="center" component="th" scope="row">
-                  {row.amount}
-                </TableCell>
-                <TableCell align="center">{row.description}</TableCell>
-                <TableCell align="center">{formatDate(row.date)}</TableCell>
-                <TableCell align="center">
-                  <IconButton color="primary" component="label" onClick={()=>setEditTransaction(row)}>
-                    <EditTwoToneIcon />
-                  </IconButton>
-                  <IconButton color="warning" component="label" onClick={() => remove(row._id)}>
-                    <DeleteSharpIcon />
-                  </IconButton>
-                </TableCell>
-              </TableRow>
-            ))}
+            {transactions.map((row) => {
+              console.log(row);
+              return (
+                <TableRow
+                  key={row._id}
+                  sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
+                >
+                  <TableCell align="center" component="th" scope="row">
+                    {row.amount}
+                  </TableCell>
+                  <TableCell align="center">{row.description}</TableCell>
+                  <TableCell align="center">{row.category_id}</TableCell>
+                  <TableCell align="center">{formatDate(row.date)}</TableCell>
+                  <TableCell align="center">
+                    <IconButton color="primary" component="label" onClick={() => setEditTransaction(row)}>
+                      <EditTwoToneIcon />
+                    </IconButton>
+                    <IconButton color="warning" component="label" onClick={() => remove(row._id)}>
+                      <DeleteSharpIcon />
+                    </IconButton>
+                  </TableCell>
+                </TableRow>
+              )
+            })}
           </TableBody>
         </Table>
       </TableContainer>
