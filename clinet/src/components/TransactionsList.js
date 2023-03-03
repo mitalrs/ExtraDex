@@ -60,7 +60,6 @@ export default function TransactionsList({ transactions, fetchTransactions, setE
           </TableHead>
           <TableBody>
             {transactions.map((row) => {
-              console.log(row);
               return (
                 <TableRow
                   key={row._id}

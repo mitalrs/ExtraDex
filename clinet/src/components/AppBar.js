@@ -27,6 +27,9 @@ export default function ButtonAppBar() {
           <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
             <Link className='text-white' to="/">Expensor</Link>
           </Typography>
+          <Link to="/category" className='text-white'>
+                  <Button color="inherit">category</Button>
+                </Link>
           {isAuthenticated && (
             <Button color="inherit" onClick={_logout}>Logout</Button>
           )}
