@@ -17,6 +17,10 @@ import Cookies from 'js-cookie';
 
 export default function TransactionsList({ transactions, fetchTransactions, setEditTransaction }) {
 
+  function categoryName(id) {
+    return 'na';
+  }
+
   async function remove(_id) {
     const token = Cookies.get('token');
     if (!window.confirm('Are you sure to delete')) return;
@@ -62,7 +66,7 @@ export default function TransactionsList({ transactions, fetchTransactions, setE
                     {row.amount}
                   </TableCell>
                   <TableCell align="center">{row.description}</TableCell>
-                  <TableCell align="center">{row.category_id}</TableCell>
+                  <TableCell align="center">{categoryName(row.category_id)}</TableCell>
                   <TableCell align="center">{formatDate(row.date)}</TableCell>
                   <TableCell align="center">
                     <IconButton color="primary" component="label" onClick={() => setEditTransaction(row)}>
