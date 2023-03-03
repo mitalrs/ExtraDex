@@ -12,13 +12,17 @@ import DeleteSharpIcon from '@mui/icons-material/DeleteSharp';
 import IconButton from '@mui/material/IconButton';
 import dayjs from 'dayjs';
 import Cookies from 'js-cookie';
+import { useSelector } from 'react-redux';
 
 
 
 export default function TransactionsList({ transactions, fetchTransactions, setEditTransaction }) {
 
+  const user = useSelector(state => state.auth.user);
   function categoryName(id) {
-    return 'na';
+    const category = user.categories.find((category)=> category._id === id);
+
+    return category ? category.label : 'NA';
   }
 
   async function remove(_id) {
