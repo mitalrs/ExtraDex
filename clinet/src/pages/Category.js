@@ -20,25 +20,27 @@ import { setUser } from '../store/auth.js';
 
 export default function Category() {
     const token = Cookies.get('token');
-    
+
     const user = useSelector((state) => state.auth.user);
-     console.log(user);
+    console.log(user);
     const dispatch = useDispatch();
 
     async function remove(id) {
-        // const res = await fetch(`${process.env.REACT_APP_API_URL}/category/${id}`,
-        // {
-        //     method: "DELETE",
-        //     headers: {
-        //         Authorization: `Bearer ${token}`,
-        //     }
-        // });
+        const res = await fetch(`${process.env.REACT_APP_API_URL}/category/${id}`,
+        {
+            method: "DELETE",
+            headers: {
+                Authorization: `Bearer ${token}`,
+            }
+        });
 
-        // if(res.ok){
-            const _user = {...user, 
-            categories: user.categories.filter((cat) => cat._id != id)}
-            dispatch(setUser({user:_user}));
-        // }
+        if(res.ok){
+        const _user = {
+            ...user,
+            categories: user.categories.filter((cat) => cat._id != id)
+        }
+        dispatch(setUser(_user));
+        }
     }
 
     return (
@@ -49,12 +51,12 @@ export default function Category() {
                     <TableHead>
                         <TableRow>
                             <TableCell align="center">Lable</TableCell>
-                            <TableCell align="center">Icon</TableCell> 
+                            <TableCell align="center">Icon</TableCell>
                             <TableCell align="center">Actions</TableCell>
                         </TableRow>
                     </TableHead>
                     <TableBody>
-                        {user.categories.map((row) => {
+                        {user?.categories.map((row) => {
                             console.log(row);
                             return (
                                 <TableRow
@@ -76,7 +78,7 @@ export default function Category() {
                                         <IconButton
                                             color="warning"
                                             component="label"
-                                        onClick={() => remove(row._id)}
+                                            onClick={() => remove(row._id)}
                                         >
                                             <DeleteSharpIcon />
                                         </IconButton>
