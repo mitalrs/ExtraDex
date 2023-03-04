@@ -48,6 +48,7 @@
     ]
   },
   "devDependencies": {
-    "@types/js-cookie": "^3.0.3"
+    "@types/js-cookie": "^3.0.3",
+    "prettier": "2.8.4"
   }
 }
