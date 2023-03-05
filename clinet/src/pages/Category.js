@@ -14,6 +14,7 @@ import Cookies from 'js-cookie';
 import { useDispatch, useSelector } from 'react-redux';
 import Container from '@mui/material/Container';
 import { setUser } from '../store/auth.js';
+import CategoryForm from '../components/CategoryForm.js';
 
 
 
@@ -44,6 +45,7 @@ export default function Category() {
 
     return (
         <Container>
+            <CategoryForm />
             <Typography sx={{ marginTop: 10 }} variant="h6">List of Categories</Typography>
             <TableContainer component={Paper}>
                 <Table sx={{ minWidth: 650 }} aria-label="simple table">
