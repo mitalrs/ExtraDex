@@ -22,8 +22,12 @@ export default function Category() {
     const token = Cookies.get('token');
 
     const user = useSelector((state) => state.auth.user);
-    console.log(user);
     const dispatch = useDispatch();
+    const [editCategory, setEditCategory] = React.useState({})
+
+    function setEdit(category) {
+        setEditCategory(category);
+    }
 
     async function remove(id) {
         const res = await fetch(`${process.env.REACT_APP_API_URL}/category/${id}`,
@@ -45,7 +49,7 @@ export default function Category() {
 
     return (
         <Container>
-            <CategoryForm editCategory={{}} fetchTransactions={()=>{}} />
+            <CategoryForm editCategory={editCategory} />
             <Typography sx={{ marginTop: 10 }} variant="h6">List of Categories</Typography>
             <TableContainer component={Paper}>
                 <Table sx={{ minWidth: 650 }} aria-label="simple table">
@@ -58,7 +62,6 @@ export default function Category() {
                     </TableHead>
                     <TableBody>
                         {user?.categories.map((row) => {
-                            console.log(row);
                             return (
                                 <TableRow
                                     key={row._id}
@@ -72,7 +75,7 @@ export default function Category() {
                                         <IconButton
                                             color="primary"
                                             component="label"
-                                        //  onClick={() => setEditTransaction(row)}
+                                         onClick={() => setEdit(row)}
                                         >
                                             <EditTwoToneIcon />
                                         </IconButton>
