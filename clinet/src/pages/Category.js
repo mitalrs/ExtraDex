@@ -45,7 +45,7 @@ export default function Category() {
 
     return (
         <Container>
-            <CategoryForm />
+            <CategoryForm editCategory={{}} fetchTransactions={()=>{}} />
             <Typography sx={{ marginTop: 10 }} variant="h6">List of Categories</Typography>
             <TableContainer component={Paper}>
                 <Table sx={{ minWidth: 650 }} aria-label="simple table">

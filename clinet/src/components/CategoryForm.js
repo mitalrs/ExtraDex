@@ -15,20 +15,19 @@ import { useSelector } from 'react-redux';
 
 
 const InitialForm = {
-  amount: 0,
-  description: '',
-  date: new Date(),
-  category_id: '',
+  label: '',
+  icon: '',
 };
+const icons = [ "User" ];
 
-export default function CategoryForm({ fetchTransactions, editTransaction }) {
+export default function CategoryForm({ fetchTransactions, editCategory }) {
   const { categories } = useSelector((state) => state.auth.user);
   const token = Cookies.get('token');
   const [form, setForm] = useState(InitialForm);
 
 
   React.useEffect(() => {
-    if (editCategory.amount !== undefined) {
+    if (editCategory._id !== undefined) {
       setForm(editCategory);
     }
   }, [editCategory]);
@@ -43,7 +42,7 @@ export default function CategoryForm({ fetchTransactions, editTransaction }) {
 
   async function handleSubmit(e) {
     e.preventDefault();
-    const res = editCategory.amount === undefined ? create() : update();
+    const res = editCategory._id === undefined ? create() : update();
 
   }
 
@@ -55,7 +54,7 @@ export default function CategoryForm({ fetchTransactions, editTransaction }) {
   }
 
   async function create() {
-    const res = await fetch(`${process.env.REACT_APP_API_URL}/transaction`, {
+    const res = await fetch(`${process.env.REACT_APP_API_URL}/category`, {
       method: "POST",
       body: JSON.stringify(form),
       headers: {
@@ -67,7 +66,7 @@ export default function CategoryForm({ fetchTransactions, editTransaction }) {
   }
 
   async function update() {
-    const res = await fetch(`${process.env.REACT_APP_API_URL}/transaction/${editCategory._id}`,
+    const res = await fetch(`${process.env.REACT_APP_API_URL}/category/${editCategory._id}`,
       {
         method: "PATCH",
         body: JSON.stringify(form),
@@ -100,16 +99,6 @@ export default function CategoryForm({ fetchTransactions, editTransaction }) {
             value={form.label}
             onChange={handleChange}
           />
-          <TextField
-            sx={{ marginRight: 5 }}
-            id="outlined-basic"
-            label="Description"
-            size="small"
-            name="description"
-            variant="outlined"
-            value={form.description}
-            onChange={handleChange}
-          />
 
           <Autocomplete
             value={getCategoryNameById()}
@@ -122,10 +111,10 @@ export default function CategoryForm({ fetchTransactions, editTransaction }) {
             renderInput={(params) => <TextField {...params} size="small" label="Icon" />}
           />
 
-          {editCategory.amount !== undefined && (
+          {editCategory._id !== undefined && (
             <Button type="submit" variant="secondary">Update</Button>
           )}
-          {editCategory.amount === undefined && (
+          {editCategory._id === undefined && (
             <Button type="submit" variant="contained">Submit</Button>
           )}
 
