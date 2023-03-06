@@ -4,14 +4,12 @@ import CardContent from '@mui/material/CardContent';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import TextField from '@mui/material/TextField';
-import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
-import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
-import { DesktopDatePicker } from '@mui/x-date-pickers/DesktopDatePicker';
 import Cookies from 'js-cookie';
 import Autocomplete from '@mui/material/Autocomplete';
 import { useState } from "react";
 import Box from '@mui/material/Box';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
+import { setUser } from '../store/auth.js';
 
 
 const InitialForm = {
@@ -21,7 +19,8 @@ const InitialForm = {
 const icons = [ "User" ];
 
 export default function CategoryForm({ fetchTransactions, editCategory }) {
-  const { categories } = useSelector((state) => state.auth.user);
+  const user = useSelector((state) => state.auth.user);
+  const dispatch = useDispatch()
   const token = Cookies.get('token');
   const [form, setForm] = useState(InitialForm);
 
@@ -48,8 +47,12 @@ export default function CategoryForm({ fetchTransactions, editCategory }) {
 
   function reload(res) {
     if (res.ok) {
+      const _user = {
+        ...user,
+        categories: [...user.categories,{...form}],
+    };
+    dispatch(setUser(_user));
       setForm(InitialForm);
-      fetchTransactions();
     }
   }
 
@@ -79,7 +82,7 @@ export default function CategoryForm({ fetchTransactions, editCategory }) {
   }
 
   function getCategoryNameById() {
-    return (categories.find((category) => category._id === form.category_id) ?? ""
+    return (user.categories.find((category) => category._id === form.category_id) ?? ""
     );
   }
 
