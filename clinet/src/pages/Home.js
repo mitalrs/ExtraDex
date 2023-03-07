@@ -4,36 +4,41 @@ import TransactionForm from "../components/TransactionForm.js";
 import TransactionsList from "../components/TransactionsList.js";
 import { useEffect, useState } from "react";
 import Cookies from "js-cookie";
+import TransactionChart from "../components/TransactionChart.js";
 
 export default function Home() {
+  const [transactions, setTransactions] = useState([]);
+  const [editTransaction, setEditTransaction] = useState({});
 
-    const [transactions, setTransactions] = useState([]);
-    const [editTransaction, setEditTransaction] = useState({});
+  useEffect(() => {
+    fetchTransactions();
+  }, []);
 
+  async function fetchTransactions() {
+    const token = Cookies.get("token");
+    const res = await fetch(`${process.env.REACT_APP_API_URL}/transaction`, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+    const { data } = await res.json();
+    setTransactions(data);
+  }
 
-    useEffect(() => {
-        fetchTransactions()
-    }, []);
+  return (
+    <Container>
+        <TransactionChart />
 
-    async function fetchTransactions() {
-        const token = Cookies.get('token');
-        const res = await fetch(`${process.env.REACT_APP_API_URL}/transaction`, 
-        {
-            headers: {
-                Authorization: `Bearer ${token}`,
-            },
-        });
-        const { data } = await res.json();
-        setTransactions(data);
-    }
+      <TransactionForm
+        fetchTransactions={fetchTransactions}
+        editTransaction={editTransaction}
+      />
 
-    return (
-        <Container>
-            <TransactionForm fetchTransactions={fetchTransactions} editTransaction={editTransaction} />
-            <TransactionsList transactions={transactions}
-                fetchTransactions={fetchTransactions}
-                setEditTransaction={setEditTransaction}
-            />
-        </Container>
-    )
+      <TransactionsList
+        transactions={transactions}
+        fetchTransactions={fetchTransactions}
+        setEditTransaction={setEditTransaction}
+      />
+    </Container>
+  );
 }
