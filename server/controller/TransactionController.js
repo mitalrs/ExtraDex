@@ -10,6 +10,15 @@ export const index = async (req, res) => {
         {
             $group: {
               _id: { $month: "$date" },
+              transactions: {
+                $push: {
+                  amount: "$amount",
+                  description: "$description",
+                  date: "$date",
+                  type: "$type",
+                  _id: "$_id",
+                },
+              },
             },
         },
     ]);
