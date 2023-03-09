@@ -7,7 +7,7 @@ import Link from '@mui/material/Link';
 import {Link as RouterLink} from 'react-router-dom';
 import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
-import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
+import LockOutlinedIcon from '@mui/icons-material/LockOutlined.js';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import Cookies from 'js-cookie';
