@@ -14,6 +14,7 @@ export const index = async (req, res) => {
                 $push: {
                   amount: "$amount",
                   description: "$description",
+                  category_id: "$category_id",
                   date: "$date",
                   type: "$type",
                   _id: "$_id",
