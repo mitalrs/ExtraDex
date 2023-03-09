@@ -27,7 +27,7 @@ export default function Home() {
 
   return (
     <Container>
-        <TransactionChart />
+        <TransactionChart data={transactions} />
 
       <TransactionForm
         fetchTransactions={fetchTransactions}
@@ -35,7 +35,7 @@ export default function Home() {
       />
 
       <TransactionsList
-        transactions={transactions}
+        data={transactions}
         fetchTransactions={fetchTransactions}
         setEditTransaction={setEditTransaction}
       />

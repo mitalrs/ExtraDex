@@ -19,6 +19,7 @@ export const index = async (req, res) => {
                   _id: "$_id",
                 },
               },
+              totalExpenses: {$sum: "$amount" },
             },
         },
     ]);
