@@ -33,8 +33,10 @@ function App() {
     fetchUser();
   }, [])
 
+  console.log(process.env.REACT_APP_API_URL)
+
   if (isLoading) {
-    return <p>Loding...</p>
+    return <p>Loding... {process.env.REACT_APP_API_URL}</p>
   }
   return (
     <>
