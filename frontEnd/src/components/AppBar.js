@@ -8,8 +8,8 @@ import { Link, useNavigate } from 'react-router-dom';
 import Cookies from 'js-cookie';
 import { useDispatch, useSelector } from 'react-redux';
 import { logout } from '../store/auth.js'
-import { ThemeProvider } from "@mui/material/styles";
 import theme from './CreateThemeMui.js';
+import { ThemeProvider } from "@mui/material/styles";
 import CssBaseline from "@mui/material/CssBaseline";
 
 export default function ButtonAppBar() {

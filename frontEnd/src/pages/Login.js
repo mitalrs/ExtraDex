@@ -14,6 +14,9 @@ import Cookies from 'js-cookie';
 import {useNavigate} from 'react-router-dom';
 import { setUser } from '../store/auth.js';
 import { useDispatch } from 'react-redux';
+import theme from '../components/CreateThemeMui.js';
+import { ThemeProvider } from "@mui/material/styles";
+
 
 
 export default function Login() {
@@ -47,7 +50,8 @@ export default function Login() {
     };
 
     return (
-        <Container component="main" maxWidth="xs">
+        <ThemeProvider theme={theme}>
+        <Container component="main" maxWidth="xs" sx={{bgcolor:'#78739d'}}>
             <CssBaseline />
             <Box
                 sx={{
@@ -57,10 +61,10 @@ export default function Login() {
                     alignItems: 'center',
                 }}
             >
-                <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
+                <Avatar sx={{ m: 1, bgcolor: '#D19D00' }}>
                     <LockOutlinedIcon />
                 </Avatar>
-                <Typography component="h1" variant="h5">
+                <Typography component="h1" variant="h5" sx={{color:'#000000'}}>
                     Sign in
                 </Typography>
                 <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
@@ -88,14 +92,14 @@ export default function Login() {
                         type="submit"
                         fullWidth
                         variant="contained"
-                        sx={{ mt: 3, mb: 2 }}
+                        sx={{ mt: 3, mb: 2,bgcolor:'#201b5b', color:'#9c97b8'}}
                     >
                         Sign In
                     </Button>
                     <Grid container>
                         <Grid item>
-                            <RouterLink to="/register">
-                            <Link component="span" variant="body2">
+                            <RouterLink to="/register" sx={{bgcolor:'#201b5b'}}>
+                            <Link component="span" variant="body2" sx={{color:'#201b5b'}}>
                                 {"Don't have an account? Register"}
                             </Link>
                             </RouterLink>
@@ -104,5 +108,6 @@ export default function Login() {
                 </Box>
             </Box>
         </Container>
+        </ThemeProvider>
     );
 }

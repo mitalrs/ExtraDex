@@ -10,6 +10,8 @@ import Box from '@mui/material/Box';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
+import theme from '../components/CreateThemeMui.js';
+import { ThemeProvider } from "@mui/material/styles";
 
 
 export default function Register() {
@@ -38,7 +40,8 @@ export default function Register() {
     };
 
     return (
-        <Container component="main" maxWidth="xs">
+        <ThemeProvider theme={theme}>
+        <Container component="main" maxWidth="xs" sx={{bgcolor:'#78739d'}}>
             <CssBaseline />
             <Box
                 sx={{
@@ -48,10 +51,10 @@ export default function Register() {
                     alignItems: 'center',
                 }}
             >
-                <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
+                <Avatar sx={{ m: 1, bgcolor: '#D19D00' }}>
                     <LockOutlinedIcon />
                 </Avatar>
-                <Typography component="h1" variant="h5">
+                <Typography component="h1" variant="h5" sx={{color:'#000000'}}>
                     Sign up
                 </Typography>
                 <Box component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 3 }}>
@@ -103,14 +106,14 @@ export default function Register() {
                         type="submit"
                         fullWidth
                         variant="contained"
-                        sx={{ mt: 3, mb: 2 }}
+                        sx={{ mt: 3, mb: 2, bgcolor:'#201b5b', color:'#9c97b8'}}
                     >
                         Sign Up
                     </Button>
                     <Grid container justifyContent="flex-end">
                         <Grid item>
-                            <RouterLink to="/login">
-                            <Link component="span" variant='body2'>
+                            <RouterLink to="/login" sx={{bgcolor:'#201b5b'}}>
+                            <Link component="span" variant='body2' sx={{color:'#201b5b'}}>
                                 Already have an account? LogIn
                             </Link>
                             </RouterLink>
@@ -119,5 +122,6 @@ export default function Register() {
                 </Box>
             </Box>
         </Container>
+        </ThemeProvider>
     );
 }
