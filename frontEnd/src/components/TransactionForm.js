@@ -85,7 +85,7 @@ export default function TransactionForm({ fetchTransactions, editTransaction }) 
   }
 
   return (
-    <Card sx={{ minWidth: 275, marginTop: 10 }}>
+    <Card sx={{ minWidth: 275, marginTop: 10, bgcolor:'#8a85aa' }}>
       <CardContent>
         <Typography variant="h6">Add new transaction</Typography>
 
@@ -132,7 +132,7 @@ export default function TransactionForm({ fetchTransactions, editTransaction }) 
           />
 
           {editTransaction.amount !== undefined && (
-            <Button type="submit" variant="secondary">Update</Button>
+            <Button type="submit" variant="secondary" >Update</Button>
           )}
           {editTransaction.amount === undefined && (
             <Button type="submit" variant="contained">Submit</Button>
