@@ -10,6 +10,8 @@ import { useState } from "react";
 import Box from '@mui/material/Box';
 import { useSelector, useDispatch } from 'react-redux';
 import { setUser } from '../store/auth.js';
+import { ThemeProvider } from "@mui/material/styles";
+import theme from './CreateThemeMui.js';
 
 
 const InitialForm = {
@@ -93,11 +95,13 @@ export default function CategoryForm({ editCategory }) {
 
   return (
     <Card sx={{ minWidth: 275, marginTop: 10 }}>
+      <ThemeProvider theme={theme}>
       <CardContent>
         <Typography variant="h6">Add new Category</Typography>
 
         <Box component='form' onSubmit={handleSubmit} sx={{ display: "flex" }}>
           <TextField
+          color="white"
             sx={{ marginRight: 5 }}
             id="outlined-basic"
             label="Label"
@@ -129,6 +133,7 @@ export default function CategoryForm({ editCategory }) {
         </Box>
 
       </CardContent>
+      </ThemeProvider>
     </Card>
   );
 }

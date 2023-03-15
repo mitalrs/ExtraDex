@@ -12,10 +12,13 @@ const theme = createTheme({
       main: "#9c97b8",
     },
     lightgray: {
-      main: "#f44336",
+      main: "#8a85aa",
     },
     darkgray: {
       main: "#666190",
+    },
+    black: {
+      main: "#000000",
     },
   },
 });

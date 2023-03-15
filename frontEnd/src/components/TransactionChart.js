@@ -14,7 +14,7 @@ import { scaleBand } from '@devexpress/dx-chart-core';
 import { ArgumentScale } from '@devexpress/dx-react-chart';
 import { Animation } from '@devexpress/dx-react-chart';
 import { EventTracker } from '@devexpress/dx-react-chart';
-import dayjs from 'dayjs'
+import dayjs from 'dayjs';
 
 export default function TransactionChart({data}) {
   const chartDate = data.map(item => {
@@ -23,7 +23,7 @@ export default function TransactionChart({data}) {
   })
   
   return (
-    <Paper sx={{marginTop:5}}>
+    <Paper sx={{marginTop:5, bgcolor:'#8a85aa'}}>
       <Chart
         data={chartDate}
       >

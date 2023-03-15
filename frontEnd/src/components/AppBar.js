@@ -8,6 +8,9 @@ import { Link, useNavigate } from 'react-router-dom';
 import Cookies from 'js-cookie';
 import { useDispatch, useSelector } from 'react-redux';
 import { logout } from '../store/auth.js'
+import { ThemeProvider } from "@mui/material/styles";
+import theme from './CreateThemeMui.js';
+import CssBaseline from "@mui/material/CssBaseline";
 
 export default function ButtonAppBar() {
   const navigate = useNavigate();
@@ -22,33 +25,36 @@ export default function ButtonAppBar() {
 
   return (
     <Box sx={{ flexGrow: 1 }}>
+      <ThemeProvider theme={theme}>
       <AppBar position="static">
-        <Toolbar>
+      <CssBaseline />
+        <Toolbar style={{backgroundColor:'#201b5b'}}>
           <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
             <Link className='text-white' to="/">Expensor</Link>
           </Typography>
           <Link to="/category" className='text-white'>
-                  <Button color="inherit">category</Button>
+                  <Button color="white">category</Button>
                 </Link>
           {isAuthenticated && (
-            <Button color="inherit" onClick={_logout}>Logout</Button>
+            <Button color="white" onClick={_logout}>Logout</Button>
           )}
 
           {
             !isAuthenticated && (
               <>
                 <Link to="/login" className='text-white'>
-                  <Button color="inherit">Login</Button>
+                  <Button color="white">Login</Button>
                 </Link>
 
                 <Link to="/register" className='text-white'>
-                  <Button color="inherit">Register</Button>
+                  <Button color="white">Register</Button>
                 </Link>
               </>
             )}
 
         </Toolbar>
       </AppBar>
+      </ThemeProvider>
     </Box>
   );
 }
