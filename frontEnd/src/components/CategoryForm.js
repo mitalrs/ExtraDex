@@ -56,7 +56,7 @@ export default function CategoryForm({ editCategory }) {
   }
 
   async function create() {
-    const res = await fetch(`${process.env.REACT_APP_API_URL}/category`, {
+    const res = await fetch(`${process.env.REACT_APP_API_URL}category`, {
       method: "POST",
       body: JSON.stringify(form),
       headers: {
@@ -72,7 +72,7 @@ export default function CategoryForm({ editCategory }) {
   }
 
   async function update() {
-    const res = await fetch(`${process.env.REACT_APP_API_URL}/category/${editCategory._id}`,
+    const res = await fetch(`${process.env.REACT_APP_API_URL}category/${editCategory._id}`,
       {
         method: "PATCH",
         body: JSON.stringify(form),
