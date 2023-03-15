@@ -96,7 +96,7 @@ export default function CategoryForm({ editCategory }) {
   return (
     <Card sx={{ minWidth: 275, marginTop: 10 }}>
       <ThemeProvider theme={theme}>
-      <CardContent>
+      <CardContent sx={{bgcolor:'#8a85aa'}}>
         <Typography variant="h6">Add new Category</Typography>
 
         <Box component='form' onSubmit={handleSubmit} sx={{ display: "flex" }}>
@@ -124,10 +124,10 @@ export default function CategoryForm({ editCategory }) {
           />
 
           {editCategory._id !== undefined && (
-            <Button type="submit" variant="secondary">Update</Button>
+            <Button type="submit" variant="secondary" sx={{bgcolor:'#666190'}}>Update</Button>
           )}
           {editCategory._id === undefined && (
-            <Button type="submit" variant="contained">Submit</Button>
+            <Button type="submit" variant="contained" sx={{bgcolor:'#201b5b',color:'#9c97b8'}}>Submit</Button>
           )}
 
         </Box>
