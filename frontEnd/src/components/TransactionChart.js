@@ -32,6 +32,7 @@ export default function TransactionChart({data}) {
         <ValueAxis />
 
         <BarSeries
+         color="#201b5b"
           valueField="totalExpenses"
           argumentField="month"
         />

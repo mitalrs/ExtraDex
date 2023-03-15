@@ -30,7 +30,7 @@ export default function ButtonAppBar() {
       <CssBaseline />
         <Toolbar style={{backgroundColor:'#201b5b'}}>
           <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-            <Link className='text-white' to="/">Expensor</Link>
+            <Link className='text-white' to="/">EXTRASEX</Link>
           </Typography>
           <Link to="/category" className='text-white'>
                   <Button color="white">category</Button>

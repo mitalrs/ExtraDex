@@ -135,7 +135,7 @@ export default function TransactionForm({ fetchTransactions, editTransaction }) 
             <Button type="submit" variant="secondary" >Update</Button>
           )}
           {editTransaction.amount === undefined && (
-            <Button type="submit" variant="contained">Submit</Button>
+            <Button type="submit" variant="contained" >Submit</Button>
           )}
 
         </Box>
