@@ -32,7 +32,7 @@ export default function TransactionsList({
   async function remove(_id) {
     const token = Cookies.get('token');
     if (!window.confirm('Are you sure to delete')) return;
-    const res = await fetch(`${process.env.REACT_APP_API_URL}/transaction/${_id}`, {
+    const res = await fetch(`${process.env.REACT_APP_API_URL}transaction/${_id}`, {
       method: "DELETE",
       headers: {
         Authorization: `Bearer ${token}`
