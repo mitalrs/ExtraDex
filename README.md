@@ -7,6 +7,9 @@ React
 MongoDB
 <a href="https://devexpress.github.io/devextreme-reactive/react/chart/docs/guides/getting-started/"> devextreme-reactive (material UI) </a>
 
+Frontend deployed: <a href="https://expense-frontend-khaki.vercel.app/"></a>
+Extradek deployed: <a href="https://expense-frontend-khaki.vercel.app/"></a>
+
 #### teck stack:
 ![JavaScript](https://img.shields.io/badge/javascript-%23323330.svg?style=for-the-badge&logo=javascript&logoColor=%23F7DF1E)
 ![React](https://img.shields.io/badge/react-%2320232a.svg?style=for-the-badge&logo=react&logoColor=%2361DAFB)
